@@ -12,10 +12,12 @@ function orderOnWhatsApp(){
   const lines=Object.entries(grouped).map(([name,qty])=>{const p=products.find(x=>x.name===name);return `• ${name} × ${qty} — ${money(p.price*qty)}`}).join('\n');
   const total=cart.reduce((s,p)=>s+p.price,0);
   const message=`Bonjour KANOË Cosmetics 👋\n\nJe souhaite passer une commande :\n${lines}\n\n💰 Total : ${money(total)}\n\nMerci de me confirmer la disponibilité et les modalités de livraison.\n\nEnvoyé depuis la boutique KANOË Cosmetics.`;
-  window.open(`https://wa.me/${SELLER_WHATSAPP}?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer');
+  const whatsappUrl=`https://wa.me/${SELLER_WHATSAPP}?text=${encodeURIComponent(message)}`;
+  // Navigation directe : évite que les bloqueurs de fenêtres empêchent WhatsApp de s'ouvrir.
+  window.location.href=whatsappUrl;
 }
 document.querySelectorAll('#filters button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render(b.dataset.filter)}));
 document.querySelector('#cartBtn').onclick=()=>document.querySelector('#drawer').classList.add('open');document.querySelector('#closeDrawer').onclick=()=>document.querySelector('#drawer').classList.remove('open');document.querySelector('.menu-btn').onclick=()=>document.querySelector('#mobileMenu').classList.toggle('open');document.querySelectorAll('.mobile-menu a').forEach(a=>a.onclick=()=>document.querySelector('#mobileMenu').classList.remove('open'));
 document.querySelector('#newsletter').onsubmit=e=>{e.preventDefault();toast('Merci ! Vous êtes inscrit(e) à KANOË.');e.target.reset()};document.querySelector('#searchBtn').onclick=()=>{const q=prompt('Que recherchez-vous ?');if(q)toast('Recherche : '+q)};
-document.querySelector('.checkout').onclick=orderOnWhatsApp;
+document.querySelector('.checkout').addEventListener('click',orderOnWhatsApp);
 render();updateCart();
