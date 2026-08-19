@@ -1,10 +1,21 @@
 const products=[{name:'Savon KANOË Original',type:'savon',price:4500,visual:'soap',desc:'Nettoyage doux & quotidien'},{name:'Huile KANOË Éclat',type:'huile',price:7500,visual:'bottle',desc:'Nutrition & fini satiné'},{name:'Sérum Gold Radiance',type:'serum',price:9500,visual:'bottle',desc:'Éclat & routine visage'},{name:'Crème Visage KANOË',type:'soin',price:8500,visual:'jar',desc:'Hydratation confort'},{name:'Savon Golden Care',type:'savon',price:5000,visual:'soap',desc:'Peau douce & parfumée'},{name:'Huile Corps Premium',type:'huile',price:8000,visual:'bottle',desc:'Soin nourrissant'},{name:'Sérum Intense',type:'serum',price:10000,visual:'bottle',desc:'Soin ciblé'},{name:'Baume Réconfort',type:'soin',price:7000,visual:'jar',desc:'Hydratation quotidienne'}];
+const SELLER_WHATSAPP='2250757432898';
 let cart=[];const money=n=>new Intl.NumberFormat('fr-FR').format(n)+' FCFA';
 function visual(type){return type==='soap'?'<div class="p-soap">KANOË</div>':type==='jar'?'<div class="p-jar">KANOË<br><small>COSMETICS</small></div>':'<div class="p-bottle"><span>KANOË</span><small>COSMETICS</small></div>'}
 function render(filter='all'){document.querySelector('#products').innerHTML=products.filter(p=>filter==='all'||p.type===filter).map(p=>`<article class="product"><div class="product-visual">${visual(p.visual)}</div><div class="product-info"><h3>${p.name}</h3><p>${p.desc}</p><span class="price">${money(p.price)}</span><button class="add" onclick="addToCart(${products.indexOf(p)})">+</button></div></article>`).join('')}
 function addToCart(i){cart.push(products[i]);updateCart();toast(products[i].name+' ajouté au panier')}
 function updateCart(){document.querySelector('#cartCount').textContent=cart.length;document.querySelector('#cartItems').innerHTML=cart.length?cart.map(p=>`<div class="cart-row"><span>${p.name}</span><b>${money(p.price)}</b></div>`).join(''):'<p style="color:#777;font-size:13px">Votre panier est vide.</p>';document.querySelector('#cartTotal').textContent=money(cart.reduce((s,p)=>s+p.price,0))}
 function toast(msg){const t=document.querySelector('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function orderOnWhatsApp(){
+  if(!cart.length){toast('Votre panier est vide.');return}
+  const grouped=cart.reduce((acc,p)=>{acc[p.name]=(acc[p.name]||0)+1;return acc},{});
+  const lines=Object.entries(grouped).map(([name,qty])=>{const p=products.find(x=>x.name===name);return `• ${name} × ${qty} — ${money(p.price*qty)}`}).join('\n');
+  const total=cart.reduce((s,p)=>s+p.price,0);
+  const message=`Bonjour KANOË Cosmetics 👋\n\nJe souhaite passer une commande :\n${lines}\n\n💰 Total : ${money(total)}\n\nMerci de me confirmer la disponibilité et les modalités de livraison.\n\nEnvoyé depuis la boutique KANOË Cosmetics.`;
+  window.open(`https://wa.me/${SELLER_WHATSAPP}?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer');
+}
 document.querySelectorAll('#filters button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render(b.dataset.filter)}));
 document.querySelector('#cartBtn').onclick=()=>document.querySelector('#drawer').classList.add('open');document.querySelector('#closeDrawer').onclick=()=>document.querySelector('#drawer').classList.remove('open');document.querySelector('.menu-btn').onclick=()=>document.querySelector('#mobileMenu').classList.toggle('open');document.querySelectorAll('.mobile-menu a').forEach(a=>a.onclick=()=>document.querySelector('#mobileMenu').classList.remove('open'));
-document.querySelector('#newsletter').onsubmit=e=>{e.preventDefault();toast('Merci ! Vous êtes inscrit(e) à KANOË.');e.target.reset()};document.querySelector('#searchBtn').onclick=()=>{const q=prompt('Que recherchez-vous ?');if(q)toast('Recherche : '+q)};render();updateCart();
+document.querySelector('#newsletter').onsubmit=e=>{e.preventDefault();toast('Merci ! Vous êtes inscrit(e) à KANOË.');e.target.reset()};document.querySelector('#searchBtn').onclick=()=>{const q=prompt('Que recherchez-vous ?');if(q)toast('Recherche : '+q)};
+document.querySelector('.checkout').onclick=orderOnWhatsApp;
+render();updateCart();
