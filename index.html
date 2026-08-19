@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content="KANOË Cosmetics — le savon qui respecte ta peau." />
   <title>KANOË Cosmetics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,10 +12,15 @@
 </head>
 <body>
   <div class="announcement">Livraison disponible en Côte d’Ivoire · Paiement à la livraison selon zone</div>
-  <header class="header"><button class="icon-btn menu-btn" aria-label="Ouvrir le menu">☰</button><a class="brand" href="#accueil"><img src="assets/kanoe-logo.svg" alt="KANOË Cosmetics" /></a><nav class="desktop-nav"><a href="#accueil">Accueil</a><a href="#boutique">Boutique</a><a href="#collections">Collections</a><a href="#apropos">À propos</a><a href="#contact">Contact</a></nav><div class="header-actions"><button class="icon-btn" id="searchBtn" aria-label="Rechercher">⌕</button><button class="icon-btn cart" id="cartBtn" aria-label="Panier">♧<span id="cartCount">0</span></button></div></header>
+  <header class="header">
+    <button class="icon-btn menu-btn" aria-label="Ouvrir le menu">☰</button>
+    <a class="brand" href="#accueil"><img src="assets/kanoe-logo.svg" alt="KANOË Cosmetics" /></a>
+    <nav class="desktop-nav"><a href="#accueil">Accueil</a><a href="#boutique">Boutique</a><a href="#collections">Collections</a><a href="#apropos">À propos</a><a href="#contact">Contact</a></nav>
+    <div class="header-actions"><button class="icon-btn" id="searchBtn" aria-label="Rechercher">⌕</button><button class="icon-btn cart" id="cartBtn" aria-label="Panier">♧<span id="cartCount">0</span></button></div>
+  </header>
   <div class="mobile-menu" id="mobileMenu"><a href="#accueil">Accueil</a><a href="#boutique">Boutique</a><a href="#collections">Collections</a><a href="#apropos">À propos</a><a href="#contact">Contact</a></div>
   <main id="accueil">
-    <section class="hero"><div class="hero-copy"><span class="eyebrow">L’art du soin · KANOË</span><h1>Le savon qui<br><em>respecte ta peau.</em></h1><p>Une beauté simple, élégante et pensée pour révéler naturellement l’éclat de ta peau.</p><a class="gold-btn" href="#boutique">Découvrir la boutique</a></div><div class="hero-art"><div class="glow"></div><div class="hero-bottle"><span>KANOË</span><small>COSMETICS</small></div><div class="hero-soap">K</div></div></section>
+    <section class="hero"><div class="hero-copy"><span class="eyebrow">L’art du soin · KANOË</span><h1>Le savon qui<br><em>respecte ta peau.</em></h1><p>Une beauté simple, élégante et pensée pour révéler naturellement l’éclat de ta peau.</p><a class="gold-btn hero-cta" href="#boutique">Découvrir la boutique</a></div><div class="hero-art"><div class="glow"></div><div class="hero-bottle"><span>KANOË</span><small>COSMETICS</small></div><div class="hero-soap">K</div></div></section>
     <section class="trust-row"><div><b>01</b><span>Formules soigneusement pensées</span></div><div><b>02</b><span>Une routine simple & efficace</span></div><div><b>03</b><span>Une identité 100% KANOË</span></div></section>
     <section class="section" id="boutique"><div class="section-head"><div><span class="eyebrow">Notre sélection</span><h2>Nos produits</h2></div><a href="#boutique" class="view-all">Voir tout →</a></div><div class="chips" id="filters"><button class="active" data-filter="all">Tous</button><button data-filter="savon">Savons</button><button data-filter="huile">Huiles</button><button data-filter="serum">Sérums</button><button data-filter="soin">Soins visage</button></div><div class="products" id="products"></div></section>
     <section class="collection" id="collections"><div class="collection-image"><div class="orb"></div><div class="collection-bottle"><span>KANOË</span><small>GOLDEN GLOW</small></div></div><div class="collection-copy"><span class="eyebrow">Collection signature</span><h2>Rituel <em>Golden Glow</em></h2><p>Un rituel inspiré de l’élégance dorée de KANOË : nettoyer, nourrir et sublimer la peau au quotidien.</p><div class="mini-list"><span>Nettoyer</span><span>Nourrir</span><span>Illuminer</span></div><a class="dark-btn" href="#boutique">Explorer la collection</a></div></section>
@@ -23,5 +28,7 @@
     <section class="newsletter" id="contact"><div><span class="eyebrow">Reste proche de KANOË</span><h2>Recevez nos nouveautés.</h2><p>Conseils, nouveaux produits et offres exclusives directement dans votre boîte mail.</p></div><form id="newsletter"><input type="email" placeholder="Votre adresse e-mail" required><button class="gold-btn" type="submit">S’inscrire</button></form></section>
   </main>
   <footer><div class="footer-brand"><img src="assets/kanoe-logo.svg" alt="KANOË"/><p>Le savon qui respecte ta peau.</p></div><div><b>Boutique</b><a href="#boutique">Tous les produits</a><a href="#collections">Collections</a><a href="#boutique">Nouveautés</a></div><div><b>Aide</b><a href="#contact">Contact</a><a href="#contact">Livraison</a><a href="#contact">FAQ</a></div><div><b>Suivez-nous</b><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">TikTok</a></div></footer>
-  <div class="drawer" id="drawer"><div class="drawer-panel"><button class="close" id="closeDrawer">×</button><h3>Votre panier</h3><div id="cartItems"></div><div class="cart-total"><span>Total</span><strong id="cartTotal">0 FCFA</strong></div><button class="gold-btn checkout">Commander</button></div></div><div class="toast" id="toast"></div><script src="app.js"></script>
-</body></html>
+  <div class="drawer" id="drawer"><div class="drawer-panel"><button class="close" id="closeDrawer">×</button><h3>Votre panier</h3><div id="cartItems"></div><div class="cart-total"><span>Total</span><strong id="cartTotal">0 FCFA</strong></div><button class="gold-btn checkout">Commander sur WhatsApp</button></div></div>
+  <div class="toast" id="toast"></div><script src="app.js"></script>
+</body>
+</html>
